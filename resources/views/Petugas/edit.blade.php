@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 
 <div class="container">
@@ -34,7 +34,8 @@
                             {!! Form::text('email_petugas', null, ['class'=>'form-control', 'id'=> 'email_petugas']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit('Simpan', null, ['class'=>'btn btn-primary']) !!}
+                            {!! Form::submit('Submit', null, ['class'=>'btn btn-primary btn']) !!}
+                            <a href="/pegawai" type="button" class="btn btn-warning">Cancel</a> 
                         </div>
                     {!! Form::close() !!}
                 </div>

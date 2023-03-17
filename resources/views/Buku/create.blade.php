@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md">
             <div class="card">
                 <div class="card-header">
                     Tambah Data Buku
@@ -91,6 +91,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

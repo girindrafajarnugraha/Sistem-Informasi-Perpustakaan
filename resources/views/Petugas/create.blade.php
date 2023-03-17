@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md">
         <div class="card">
             <div class="card-header">
                 Tambah Data Petugas
@@ -42,11 +42,11 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="/pegawai"  class="btn btn-warning">Cancel</a>
                   </form>
             </div>
         </div>
     </div>
 </div>
-
 
 @endsection
