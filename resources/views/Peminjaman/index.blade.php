@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md">
         <div>
-            <a href="{{route ('anggota.create')}}" class="btn btn-sm btn-primary">Tambah Anggota</a>
+            <a href="{{route ('peminjaman.create')}}" class="btn btn-sm btn-primary">Tambah Anggota</a>
         </div>
         <div class="card">
             <div class="card-header">

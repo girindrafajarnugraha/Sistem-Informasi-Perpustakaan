@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anggota;
+use App\Models\Buku;
+use App\Models\Peminjaman;
+use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PeminjamanController extends Controller
 {
@@ -23,7 +28,14 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        //
+        $buku = Buku::all();
+        $bukus = Buku::all();
+        // $buku = DB::table('bukus')
+        // ->select('id', 'kode_buku', 'judul_buku', 'jumlah_buku')
+        // ->get();
+        $anggota = Anggota::all();
+        $petugas = Petugas::all();
+        return view('Peminjaman.create', compact('bukus', 'buku', 'anggota', 'petugas'));
     }
 
     /**
@@ -34,7 +46,17 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $data = new Peminjaman();
+        $data->id_anggotas = $request->id_anggotas;
+        // $data->nama_anggota = $request->nama_anggota;
+        $data->kode_pinjam = $request->kode_pinjam;
+        $data->tanggal_pinjam = $request->tanggal_pinjam;
+        $data->tanggal_kembali = $request->tanggal_kembali;
+        $data->lama_pinjam = $request->lama_pinjam;
+        $data->id_bukus = $request->id_bukus;
+        $data->id_petugas = $request->id_petugas;
+        $data->save();
     }
 
     /**

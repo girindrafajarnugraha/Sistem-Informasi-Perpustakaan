@@ -1,8 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 @section('content')
 
 <div class="row">
-    <div class="col-md">
+    <div class="col">
         <div class="card">
             <div class="card-header">
                 Tambah Data Petugas
@@ -41,9 +41,9 @@
                         <input type="email" name="email_petugas" class="form-control" placeholder="E-Mail" id="email_petugas">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/pegawai"  class="btn btn-warning">Cancel</a>
-                  </form>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="/pegawai" type="button" class="btn btn-warning">Batal</a>
+                </form>
             </div>
         </div>
     </div>
