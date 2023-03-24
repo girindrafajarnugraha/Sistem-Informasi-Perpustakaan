@@ -17,7 +17,7 @@
                     @endforeach
                 </ul>
             </div>
-            @endif
+            c
             <div class="card-body">
                 <form action="{{route ('buku.store')}}" method="POST">
                     @csrf

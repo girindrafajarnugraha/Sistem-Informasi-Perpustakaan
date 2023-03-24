@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class PeminjamanController extends Controller
 {
@@ -18,7 +19,15 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
+        $peminjaman = Peminjaman::all();
+        $join = DB::table('peminjaman')
+        ->select('peminjaman.id', 'peminjaman.kode_pinjam', 'peminjaman.lama_pinjam', 'peminjaman.tanggal_pinjam', 'peminjaman.tanggal_kembali', 'peminjaman.id_petugas', 'peminjaman.id_anggotas', 'peminjaman.id_bukus',
+                'anggotas.nama_anggota', 'petugas.nama_petugas', 'bukus.judul_buku')
+        ->join('anggotas', 'anggotas.id', '=', 'peminjaman.id_anggotas')
+        ->join('petugas', 'petugas.id', '=', 'peminjaman.id_petugas')
+        ->join('bukus', 'bukus.id', '=', 'peminjaman.id_bukus')
+        ->get();
+        return view('Peminjaman.index', compact('join', 'peminjaman'));
     }
 
     /**
@@ -47,16 +56,40 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         
+        // $data = new Peminjaman();
+        // $data->id_anggotas = $request->id_anggotas;
+        // // $data->nama_anggota = $request->nama_anggota;
+        // $data->kode_pinjam = $request->kode_pinjam;
+        // $data->tanggal_pinjam = $request->tanggal_pinjam;
+        // $data->tanggal_kembali = $request->tanggal_kembali;
+        // $data->lama_pinjam = $request->lama_pinjam;
+        // $data->id_bukus = $request->id_bukus;
+        // $data->id_petugas = $request->id_petugas;
+        // $data->save();
+
+        $validator = Validator::make($request->all(), [
+            'id_anggotas' => 'required',
+            'kode_pinjam' => 'required|max:10',
+            'tanggal_pinjam' => 'required',
+            'tanggal_kembali' => 'required',
+            'lama_pinjam' => 'required|max:5',
+            'id_bukus' => 'required',
+            'id_petugas' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return redirect('peminjaman/create')
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
         $data = new Peminjaman();
-        $data->id_anggotas = $request->id_anggotas;
-        // $data->nama_anggota = $request->nama_anggota;
-        $data->kode_pinjam = $request->kode_pinjam;
-        $data->tanggal_pinjam = $request->tanggal_pinjam;
-        $data->tanggal_kembali = $request->tanggal_kembali;
-        $data->lama_pinjam = $request->lama_pinjam;
-        $data->id_bukus = $request->id_bukus;
-        $data->id_petugas = $request->id_petugas;
-        $data->save();
+        $simpan = $data->create($request->all());
+        if ($simpan){
+            return redirect()->route('peminjaman.index')->with('success', 'Data berhasil disimpan!');
+        }else{
+            return redirect()->route('peminjaman.index')->with('errors', 'Data gagal disimpan!');
+        }
     }
 
     /**

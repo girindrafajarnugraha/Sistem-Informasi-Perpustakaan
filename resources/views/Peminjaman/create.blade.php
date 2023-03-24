@@ -4,11 +4,22 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
+            @if (Count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $pesan)
+                    <li>
+                        {{$pesan}}
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <div class="card-header">
                 <h3 class="card-title">DATA ANGGOTA</h3>
             </div>
             <div class="card-body">
-                <form action="{{route ('peminjaman.store')}}" method="POST">
+                <form class="needs-validation" action="{{route ('peminjaman.store')}}" method="POST">
                     @csrf
                     {{-- <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Kode Anggota</label>
@@ -17,7 +28,7 @@
 
                     <div class="form-group">
                         <label>Kode Anggota</label>
-                        <select class="form-control js-example-basic-single" style="width: 100%;">
+                        <select class="form-control js-example-basic-single" name="id_anggotas" id="id_anggotas" style="width: 100%;">
                             <option selected="selected">-Pilih Kode Anggota-</option>
                             @foreach ($anggota as $anggota)
                             <option value="{{$anggota->id}}">{{$anggota->kode_anggota}} / {{$anggota->nama_anggota}}</option>
@@ -102,7 +113,7 @@
 
                 <div class="form-group">
                     <label>Buku</label>
-                    <select class="form-control js-example-basic-single" style="width: 100%;">
+                    <select class="form-control js-example-basic-single" name="id_bukus" id="id_bukus" style="width: 100%;">
                         <option selected="selected">-Pilih Buku-</option>
                         @foreach ($bukus as $buku)
                         <option value="{{$buku->id}}">{{$buku->kode_buku}} / {{$buku->judul_buku}}</option>
@@ -112,7 +123,7 @@
 
                 {{-- <div class="form-group">
                     <label>Buku</label>
-                    <select class="form-control js-example-basic-multiple" name="states[]" multiple="multiple">
+                    <select class="form-control js-example-basic-multiple" name="id_bukus" id="id_bukus" multiple="multiple">
                         @foreach ($bukus as $buku)
                         <option value="{{$buku->id}}">{{$buku->kode_buku}} / {{$buku->judul_buku}}</option>
                         @endforeach
@@ -121,7 +132,7 @@
 
                 <div class="form-group">
                     <label>Petugas</label>
-                    <select class="form-control js-example-basic-single" style="width: 100%;">
+                    <select class="form-control js-example-basic-single" name="id_petugas" id="id_petugas" style="width: 100%;">
                         <option selected="selected">-Pilih Petugas-</option>
                         @foreach ($petugas as $petugas)
                         <option value="{{$petugas->id}}">{{$petugas->kode_petugas}} / {{$petugas->nama_petugas}}</option>
@@ -131,7 +142,7 @@
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Pinjam</button>
-                    <a href="/pegawai" type="button" class="btn btn-warning">Batal</a>
+                    <a href="/peminjaman" type="button" class="btn btn-warning">Batal</a>
                 </div>
             </div>
         </form>
