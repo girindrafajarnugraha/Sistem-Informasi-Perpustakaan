@@ -39,12 +39,15 @@ class PeminjamanController extends Controller
     {
         $buku = Buku::all();
         $bukus = Buku::all();
+        $book = DB::table('bukus')
+                ->groupBy('kategori_buku')
+                ->get();
         // $buku = DB::table('bukus')
         // ->select('id', 'kode_buku', 'judul_buku', 'jumlah_buku')
         // ->get();
         $anggota = Anggota::all();
         $petugas = Petugas::all();
-        return view('Peminjaman.create', compact('bukus', 'buku', 'anggota', 'petugas'));
+        return view('Peminjaman.create', compact('book', 'bukus', 'buku', 'anggota', 'petugas'));
     }
 
     /**

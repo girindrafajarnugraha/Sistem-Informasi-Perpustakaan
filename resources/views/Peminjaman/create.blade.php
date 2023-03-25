@@ -110,8 +110,24 @@
             </div>
             <div class="card-body">
                 
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select class="form-control js-example-basic-single" name="kategori_buku" id="kategori_buku" style="width: 100%;" data-dependent="kode_buku">
+                        <option selected="selected">-Pilih Kategori-</option>
+                        @foreach ($book as $buku)
+                        <option value="{{$buku->kategori_buku}}">{{$buku->kategori_buku}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-group">
+                    <label>Kode Buku</label>
+                    <select class="form-control js-example-basic-single" name="id_bukus" id="id_bukus" style="width: 100%;" data-dependent="judul_buku">
+                        <option value="">Pilih Kode Buku</option>
+                    </select>
+                </div>
+
+                {{-- <div class="form-group">
                     <label>Buku</label>
                     <select class="form-control js-example-basic-single" name="id_bukus" id="id_bukus" style="width: 100%;">
                         <option selected="selected">-Pilih Buku-</option>
@@ -119,7 +135,7 @@
                         <option value="{{$buku->id}}">{{$buku->kode_buku}} / {{$buku->judul_buku}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 {{-- <div class="form-group">
                     <label>Buku</label>
