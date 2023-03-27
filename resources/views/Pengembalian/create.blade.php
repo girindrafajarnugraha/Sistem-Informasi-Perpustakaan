@@ -165,7 +165,7 @@
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Pinjam</button>
-                    <a href="/peminjaman" type="button" class="btn btn-warning">Batal</a>
+                    <a href="/pengembalian" type="button" class="btn btn-warning">Batal</a>
                 </div>
             </div>
             @csrf

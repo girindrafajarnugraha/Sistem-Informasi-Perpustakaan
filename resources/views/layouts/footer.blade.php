@@ -78,6 +78,28 @@
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
+
+    
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+          $('.dinamis').change(function() {
+            if($(this.val() != '') {
+              var pilih = $(this).attr('id')
+              var nilai = $(this).val()
+              var depend = $(this).data('dependent')
+              var token = $("input[name = '_token']").val();
+              $.ajax({
+                url: '{{route('jabar')}}',
+                method: 'POST',
+                data: { pilih: pilih, nilai: nilai, depend: depend, _token: token},
+                success: function (res){
+                  $('#'+depend).html(res)
+                }
+              })
+            }
+          });
+      });
 </script>
 </body>
 </html>

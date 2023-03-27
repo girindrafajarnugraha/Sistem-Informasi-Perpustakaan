@@ -139,4 +139,21 @@ class PeminjamanController extends Controller
     {
         //
     }
+
+    public function jabar(Request $request)
+    {
+        $pilih = $request->get('pilih');
+        $nilai = $request->get('nilai');
+        $depend = $request->get('depend');
+
+        $data = DB::table('bukus')
+                ->where($pilih,$nilai)
+                ->groupBy($depend)
+                ->get();
+        $hasil = '<option value="">Pilih Kode Buku'.ucfirst($depend).'</option>';
+        foreach($data as $value){
+            $hasil .= '<option value="'.$value->depend.'">'.$value->depend.'</option>';
+        }   
+        echo $hasil;
+    }
 }

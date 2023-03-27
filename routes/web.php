@@ -33,6 +33,8 @@ Route::resource('/buku', BukuController::class);
 Route::resource('/anggota', AnggotaController::class);
 Route::resource('/peminjaman', PeminjamanController::class);
 Route::resource('/pengembalian', PengembalianController::class);
-Route::get('/des',function(){
-    return view('layouts.master');
+Route::get('/dashboard',function(){
+    return view('dashboard');
 });
+
+Route::post('jabar', [App\Http\Controllers\PeminjamanController::class, 'jabar'])->name('jabar');
