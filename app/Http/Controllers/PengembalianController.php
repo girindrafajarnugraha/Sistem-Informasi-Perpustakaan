@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
+use App\Models\Pengembalian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengembalianController extends Controller
 {
@@ -13,7 +16,20 @@ class PengembalianController extends Controller
      */
     public function index()
     {
-        //
+        $data = Pengembalian::join();
+        $idPinjam = Peminjaman::all();
+
+        // $kembali = DB::table('pengembalians')
+        //         ->select('pengembalians.kode_pengembalian', 'pengembalians.tanggal_pengembalian', 'pengembalians.status', 'pengembalians.keterangan', 'pengembalians.denda', 'pengembalians.id_peminjaman',
+        //                     'peminjaman.id', 'peminjaman.kode_pinjam', 'peminjaman.lama_pinjam', 'peminjaman.tanggal_pinjam', 'peminjaman.tanggal_kembali')
+        //         ->join('peminjaman', 'peminjaman.id', '=', 'pengembalians.id_peminjaman')
+        //         ->get();
+        // $pinjam = DB::table('peminjaman')
+        //         ->select('peminjaman.id_bukus', 'bukus.judul_buku')
+        //         ->join('bukus', 'bukus.id', '=', 'peminjaman.id_bukus')
+        //         ->where('peminjaman.id', '=', $kembali)
+        //         ->get();
+        return view('Pengembalian.index', compact('data', 'idPinjam'));
     }
 
     /**
@@ -23,7 +39,19 @@ class PengembalianController extends Controller
      */
     public function create()
     {
-        //
+        $data = Peminjaman::all();
+        $buku = DB::table('bukus')
+                ->groupBy('kategori_buku')
+                ->get();
+
+        $petugas = DB::table('petugas')
+                ->select('petugas.nama_petugas', 'petugas.id', 'petugas.kode_petugas',
+                        'peminjaman.id', 'peminjaman.kode_pinjam', 'peminjaman.id_petugas')
+                ->join('peminjaman', 'peminjaman.id_petugas', '=', 'petugas.id')
+                ->groupBy('peminjaman.id_petugas')
+                ->get();
+
+        return view('Pengembalian.create', compact('data', 'buku', 'petugas'));
     }
 
     /**
