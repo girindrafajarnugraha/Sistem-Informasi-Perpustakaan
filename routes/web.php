@@ -33,6 +33,7 @@ Route::resource('/buku', BukuController::class);
 Route::resource('/anggota', AnggotaController::class);
 Route::resource('/peminjaman', PeminjamanController::class);
 Route::resource('/pengembalian', PengembalianController::class);
+
 Route::get('/dashboard',function(){
     return view('dashboard');
 });

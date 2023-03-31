@@ -4,6 +4,29 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+      
+            <!-- The slideshow -->
+            <div class="carousel-inner ">
+              <div class="carousel-item active">
+                <img src="{{asset('1.jpg')}}" class="img-responsive center-block d-block mx-auto" style="height: 300px;width: 1536px;">
+              </div>
+              <div class="carousel-item">
+                <img src="{{asset('2.jpeg')}}" class="img-responsive center-block d-block mx-auto" style="height: 300px;width: 1536px;">
+              </div>
+              <div class="carousel-item">
+                <img src="{{asset('3.jpeg')}}" class="img-responsive center-block d-block mx-auto" style="height: 300px;width: 1536px;">
+              </div>
+            </div>
+        </div><br>
+        
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-3 col-6">

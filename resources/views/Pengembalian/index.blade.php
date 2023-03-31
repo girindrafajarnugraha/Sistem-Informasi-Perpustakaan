@@ -14,29 +14,39 @@
                 <table id="myTable" class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>Kode Peminjaman</th>
-                        <th>Nama Anggota</th>
+                        <th>No</th>
+                        <th>No. Pinjam</th>
                         <th>Buku</th>
                         <th>Tanggal Peminjaman</th>
+                        <th>Jatuh Tempo</th>
                         <th>Tanggal Pengembalian</th>
-                        <th>Lama Peminjaman <i>(Hari)</i></th>
-                        <th>Petugas</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($join as $data)
+                    @foreach ($data as $data)
                     <tr>
+                        <th>1</th>
                         <th>{{$data->kode_pinjam}}</th>
-                        <th>{{$data->nama_anggota}}</th>
-                        <th>{{$data->judul_buku}}</th>
+                        <th>{{$data->id_peminjaman}}</th> 
                         <th>{{$data->tanggal_pinjam}}</th>
                         <th>{{$data->tanggal_kembali}}</th>
-                        <th>{{$data->lama_pinjam}}</th>
-                        <th>{{$data->nama_petugas}}</th>
+                        <th>{{$data->tanggal_pengembalian}}</th>
                         <th>
-                            <a href="{{route ('pengembalian.edit', $data->id)}}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{route ('pengembalian.destroy', $data->id)}}" onclick="return confirm('Apakah yakin data akan dihapus')" method="POST">
+                            @if($data->status == 'Lengkap')
+                                <p class="text-success">{{$data->status}}</p>
+                            @elseif($data->status == 'Kurang')
+                                <p class="text-warning">{{$data->status}}</p>
+                            @elseif($data->status == 'Terlambat')
+                                <p class="text-danger">{{$data->status}}</p>
+                            @endif
+                        </th>
+                        <th>{{$data->keterangan}}</th>
+                        <th>
+                            <a href="" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="" onclick="return confirm('Apakah yakin data akan dihapus')" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

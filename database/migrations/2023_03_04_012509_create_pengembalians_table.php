@@ -13,13 +13,15 @@ class CreatePengembaliansTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengembalians', function (Blueprint $table) {
+        Schema::table('pengembalians', function (Blueprint $table) {
             $table->increments('id');
-            // $table->string('id_kembali', 10);
-            $table->string('tanggal_pinjam')->nullable();
-            $table->string('tanggal_kembali')->nullable();
-            $table->text('keterangan');
-            $table->integer('denda')->nullable();
+            $table->unsignedInteger('id_peminjaman');
+            $table->unsignedInteger('id_petugas');
+            $table->date('tanggal_pengembalian')->nullable();
+            $table->text('keterangan')->nullable();
+            $table->enum('status', ['Lengkap', 'Kurang', 'Terlambat'])->nullable();
+            $table->foreign('id_peminjaman')->references('id')->on('peminjaman')->onDelete('cascade');
+            $table->foreign('id_petugas')->references('id')->on('petugas')->onDelete('cascade');
             $table->timestamps();
         });
     }
